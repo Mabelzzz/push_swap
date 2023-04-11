@@ -3,7 +3,9 @@
 int quicksort(t_list **lst, t_stc *stack, int size)
 {
 	static int	id;
-
+	(void) lst;
+	(void) size;
+// sort_three_min(stack);
 	id = qs_pb(lst, stack, size);
 	while (id--)
 	{
@@ -17,7 +19,7 @@ int quicksort(t_list **lst, t_stc *stack, int size)
 	}
 	while (stack->b)
 	{
-		printf("b = %d ---- id = %d| ck_id = %d\n", stack->b->val, stack->b->id, stack->b->chunk_id);
+		printf("b = %d ---- id = %d\n", stack->b->val, stack->b->id);
 		stack->b = stack->b->next;
 	}
 	exit(0);
@@ -71,7 +73,7 @@ int qs_pb(t_list **lst, t_stc *stack, int size)
     {
 		if (stack->a->id <= stack->upper)
         {
-			printf("a = %d | <= | up = %d |\n", stack->a->id , stack->upper);
+			printf("a = %d | <= | up = %d | ck_sz = %d | pb = %d|\n", stack->a->id , stack->upper, stack->chunk_size, stack->pb_cnt+1);
 			stack->a->chunk_id = id1;
             pb(stack);
             stack->pb_cnt++;
@@ -126,7 +128,7 @@ int qs_pa(t_list **lst, t_stc *stack, int size)
 			sort_three_max(stack);
 		while (size--)
 		{
-			printf("b = %d | sz = %d | up = %d |\n", stack->b->id, size, stack->upper);
+			printf("b = %d | sz = %d | up = %d | ck_sz = %d | pa = %d|\n", stack->b->id, size, stack->upper, stack->chunk_size, stack->pa_cnt);
 			pa(stack);
 		}
         return (id);
@@ -137,13 +139,14 @@ int qs_pa(t_list **lst, t_stc *stack, int size)
     {
 		if (stack->b->id > stack->upper)
         {
-			printf("b = %d | >= | up = %d | size = %d\n", stack->b->id , stack->upper, size);
+			printf("b = %d | sz = %d | up = %d | ck_sz = %d | pa = %d|\n", stack->b->id, size, stack->upper, stack->chunk_size, stack->pa_cnt);
             pa(stack);
             stack->pa_cnt++;
         }
-		else if (stack->rb_cnt++)
+		else
         {
 			rb(stack);
+			stack->rb_cnt++;
         }
     }
 	while (stack->rb_cnt-- > 0 && sz != stack->chunk_size)

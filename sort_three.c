@@ -85,13 +85,15 @@ void	sort_three_min(t_stc *stack)
 		return ;
 	if (stack->x > stack->y && stack->x > stack->z) 
 		sa(stack);
-	else if (stack->y > stack->x && stack->y > stack->z) 
+	set_val(stack, 'a');
+	if (stack->y > stack->x && stack->y > stack->z) 
 	{
 		ra(stack);
 		sa(stack);
 		rra(stack);
 	}
-	else if (stack->z > stack->y && stack->z > stack->x && stack->x > stack->y) // x > z > y -- 3 1 2
+	set_val(stack, 'a');
+	if (stack->z > stack->y && stack->z > stack->x && stack->x > stack->y) // x > z > y -- 3 1 2
 		sa(stack);
 	return ;
 }
