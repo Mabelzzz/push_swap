@@ -1,4 +1,4 @@
-#include "push_swap.h"
+// #include "push_swap.h"
 
 // void	sort_hund(t_stc *stack, t_list **lst, char st)
 // {

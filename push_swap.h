@@ -11,9 +11,9 @@ typedef struct s_list
 {
 	int				val;
 	int				id;
-	int				tmp_id;
-	int				chunk_id;
-	int				i;
+	// int				tmp_id;
+	// int				chunk_id;
+	// int				i;
 	struct s_list	*next;
 }	t_list;
 
@@ -25,24 +25,25 @@ typedef struct s_stc
 	int		y;
 	int		z;
 	int		chunk_size;
+	int		chunk;
 	int		range;
 	int		min;
 	int		max;
 	int		size_a;
 	int		size_b;
-	int		lower;
+	// int		lower;
 	int		upper;
-	int		push_a;
-	int		push_b;
+	// int		push_a;
+	// int		push_b;
 	int		med;
 	int		len;
-	int		round;
+	// int		round;
 	int		pb_cnt;
 	int		pa_cnt;
 	int		ra_cnt;
 	int		rb_cnt;
-	int		rra_cnt;
-	int		rrb_cnt;
+	// int		rra_cnt;
+	// int		rrb_cnt;
 	int		tmp_sz;
 	t_list	*a;
 	t_list	*b;
@@ -93,7 +94,7 @@ void	ss(t_stc *stack);
 
 // push_swap.c
 void	init(t_stc *stack);
-void	sort_by_len(t_stc *stack, t_list **lst, int len);
+void	sort_by_len_a(t_stc *stack, t_list **lst, int len);
 void	sort_by_len_b(t_stc *stack, int len);
 void	push_id_a(t_stc *stack, t_list *tmp, int id);
 void	push_id_b(t_stc *stack, t_list *tmp, int id);
@@ -106,31 +107,31 @@ int		check_sort_max(t_list *lst, int len);
 int		check_sort_min(t_list *lst, int len);
 int		check_sort(t_list *lst);
 // sort_three.c
-void	sort_two(t_stc *stack);
-// void	sort_two_max(t_list **lst, char st);
-void	sort_three(t_stc *stack);
-// void	sort_three_max(t_stc *stack, t_list **lst, char st);
-void	sort_two_max(t_stc *stack);
-void	sort_three_max(t_stc *stack);
-// void	sort_three_min(t_stc *stack, t_list *tmp, int r);
-void	sort_three_min(t_stc *stack);
+void	sort_2a(t_stc *stack);
+// void	sort_2b(t_list **lst, char st);
+void	sort_3a(t_stc *stack);
+// void	sort_3b_top(t_stc *stack, t_list **lst, char st);
+void	sort_2b(t_stc *stack);
+void	sort_3b_top(t_stc *stack);
+// void	sort_3a_top(t_stc *stack, t_list *tmp, int r);
+void	sort_3a_top(t_stc *stack);
 void	sort_3b_bottom(t_stc *stack);
 
 void	set_val(t_stc *stack, char st);
 void set_index(t_list *stack);
 
 // sort_hundred.c
-void	sort_hundred(t_stc *stack, t_list **lst, char st);
-void	sort_hund(t_stc *stack, t_list **lst, char st);
+// void	sort_hundred(t_stc *stack, t_list **lst, char st);
+// void	sort_hund(t_stc *stack, t_list **lst, char st);
 int		quick_sort_pb(t_stc *stack, t_list **lst, char st);
 int		quick_sort_pa(t_stc *stack, t_list **lst, char st);
 void	find_max(t_stc *stack);
-void	push_b(t_stc *stack, int ck);
-void	send_back_a(t_stc *stack);
-void	send_back_b(t_stc *stack);
-int qs_pb2(t_list **lst, t_stc *stack, int size);
+// void	push_b(t_stc *stack, int ck);
+// void	send_back_a(t_stc *stack);
+// void	send_back_b(t_stc *stack);
+// int qs_pb2(t_list **lst, t_stc *stack, int size);
 // sort_five.c
-void	sort_four(t_stc *stack, int min);
+void	sort_ten(t_stc *stack, int min);
 void	sort_five(t_stc *stack, int min);
 void	sort_ten(t_stc *stack, int min);
 void	push_min_b(t_stc *stack, int id);
@@ -138,12 +139,13 @@ void	push_min_b3(t_stc *stack, int id);
 // void 	sort_stack(t_list **lst, t_stc *stack);
 int	quicksort(t_list **lst, t_stc *stack, int size);
 int quicksort_back(t_list **lst, t_stc *stack);
-int qs_pb(t_list **lst, t_stc *stack, int size);
-int qs_pa(t_list **lst, t_stc *stack, int size);
+
+void quicksort_a(t_list **lst, t_stc *stack, int size);
+void quicksort_b(t_list **lst, t_stc *stack, int size);
 // utils.c
-int		ft_atoi (char *s);
+int		ft_atoi (char *s, t_stc *stack, int ml);
 void	putstr(char *str);
-void	put_st(char st);
+// void	put_st(char st);
 void	error(void);
 void	error_free(t_stc *stack);
 void	free_stack_tmp(t_stc *stack);

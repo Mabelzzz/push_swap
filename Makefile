@@ -12,13 +12,13 @@ SRCS = 	check_error.c \
 		oprt_rerotate.c \
 		oprt_rotate.c \
 		oprt_swap.c \
-		sort_five.c \
-		sort_hundred.c \
 		sort_three.c \
 		push_swap.c \
 		utils_lst.c \
 		utils.c \
-		sort_100.c \
+		sort_five.c \
+		# sort_100.c \
+		# sort_hundred.c \
 
 OBJS = $(SRCS:.c=.o)
 

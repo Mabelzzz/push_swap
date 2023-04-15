@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void	sort_four(t_stc *stack, int min)
+void	sort_ten(t_stc *stack, int min)
 {
 	// printf("min = %d \n", min);
 	while (min <= stack->cnt - 3)
@@ -9,7 +9,7 @@ void	sort_four(t_stc *stack, int min)
 		min++;
 	}
 	min = stack->min;
-	sort_three(stack);
+	sort_3a(stack);
 	while (min <= stack->cnt - 3)
 	{
 		pa(stack);
@@ -17,14 +17,7 @@ void	sort_four(t_stc *stack, int min)
 	}
 }
 
-void	sort_five(t_stc *stack, int min)
-{
-	push_min_b(stack, min);
-	push_min_b(stack, min + 1);
-	sort_three(stack);
-	pa(stack);
-	pa(stack);
-}
+
 
 // void	sort_ten(t_stc *stack, int min)
 // {
@@ -190,9 +183,9 @@ void	push_id_a(t_stc *stack, t_list *tmp, int id)
 // 		// if (size == 2)
 // 		// 	sort_two_min(lst, 'a');
 // 		// else if (size == 3)
-// 		// 	sort_three_min(stack, lst, 'a');
-// 		// sort_four(stack, stack->min);
-// 		sort_by_len(stack, lst, sz_a);
+// 		// 	sort_3a_top(stack, lst, 'a');
+// 		// sort_ten(stack, stack->min);
+// 		sort_by_len_a(stack, lst, sz_a);
 // 		// printf("\n -----------------------------final---------------------------%d \n", sz_a);
 // 		while (stack->a)
 // 		{
@@ -303,8 +296,8 @@ void	push_id_a(t_stc *stack, t_list *tmp, int id)
 // 		// if (size == 2)
 // 		// 	sort_two_min(lst, 'a');
 // 		// else if (size == 3)
-// 		// 	sort_three_min(stack, lst, 'a');
-// 		// sort_four(stack, stack->min);
+// 		// 	sort_3a_top(stack, lst, 'a');
+// 		// sort_ten(stack, stack->min);
 // 	int	sz_b;
 // 	// int	sz_a;
 // 	static int	tmp;

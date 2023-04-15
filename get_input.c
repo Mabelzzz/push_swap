@@ -11,10 +11,14 @@ void	get_val(t_stc *stack, int argc, char **argv)
 
 	i = 0;
 	// nbr = 0;
+	if (argv[1][0] == 0)
+		error();
 	stack->tmp = malloc(sizeof(char **) * (argc));
 	while (i < argc - 1)
 	{
 		stack->tmp[i] = ft_split(argv[i + 1], ' ');
+		if (!stack->tmp[i])
+			error_free(stack);
 		j = 0;
 		while (stack->tmp[i][j])
 		{
@@ -24,6 +28,8 @@ void	get_val(t_stc *stack, int argc, char **argv)
 			j++;
 		}
 		i++;
+		if (stack->cnt == 0)
+			error_free(stack);
 	}
 	stack->tmp[i] = NULL;
 }
@@ -45,13 +51,13 @@ void	get_list(t_stc *stack)
 		{
 			if (i == 0 && j == 0)
 			{
-				stack->a->val = ft_atoi(stack->tmp[i][j]);
+				stack->a->val = ft_atoi(stack->tmp[i][j], stack, 0);
 				start = stack->a;
 			}
 			else
 			{
 				tmp = malloc(sizeof(t_stc));
-				tmp->val = ft_atoi(stack->tmp[i][j]);
+				tmp->val = ft_atoi(stack->tmp[i][j], stack, 1);
 				tmp->next = NULL;
 				stack->a->next = tmp;
 				stack->a = stack->a->next;

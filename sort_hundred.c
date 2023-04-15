@@ -116,3 +116,5 @@
 // 	// 	return ;
 // 	// find_max(stack);
 // }
+
+void    sort_100(t_stc *stack, t_list)
