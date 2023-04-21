@@ -22,7 +22,7 @@ void	pa(t_stc *stack)
 
 	top = push(&stack->b);
 	ft_lstadd_front(&stack->a, top);
-	putstr("pa\n");
+	ft_putstr("pa\n");
 }
 
 void	pb(t_stc *stack)
@@ -31,5 +31,5 @@ void	pb(t_stc *stack)
 
 	top = push(&stack->a);
 	ft_lstadd_front(&stack->b, top);
-	putstr("pb\n");
+	ft_putstr("pb\n");
 }

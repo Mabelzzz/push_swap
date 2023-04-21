@@ -26,18 +26,18 @@ void	reverse_rotate(t_list **lst)
 void	rra(t_stc *stack)
 {
 	reverse_rotate(&stack->a);
-	putstr("rra\n");
+	ft_putstr("rra\n");
 }
 
 void	rrb(t_stc *stack)
 {
 	reverse_rotate(&stack->b);
-	putstr("rrb\n");
+	ft_putstr("rrb\n");
 }
 
 void	rrr(t_stc *stack)
 {
 	reverse_rotate(&stack->a);
 	reverse_rotate(&stack->b);
-	putstr("rrr\n");
+	ft_putstr("rrr\n");
 }

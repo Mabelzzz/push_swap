@@ -17,7 +17,7 @@ SRCS = 	check_error.c \
 		utils_lst.c \
 		utils.c \
 		sort_five.c \
-		# sort_100.c \
+		sort_100.c \
 		# sort_hundred.c \
 
 OBJS = $(SRCS:.c=.o)
@@ -32,14 +32,14 @@ $(NAME): $(OBJS)
 
 norm:
 	norminette -R checkforbiddensourceheader $(SRCS)
-	norminette -R checkdefine so_long.h get_next_line/get_next_line.h
+	# norminette -R checkdefine so_long.h get_next_line/get_next_line.h
 
 clean:
-	@rm -f $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	@rm -f $(OBJS)
-	@rm -f push_swap
+	@rm -rf $(NAME)
+	@rm -rf push_swap.dSYM
 
 re:	fclean all
 

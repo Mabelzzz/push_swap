@@ -31,9 +31,9 @@ typedef struct s_stc
 	int		max;
 	int		size_a;
 	int		size_b;
-	// int		lower;
+	int		lower;
 	int		upper;
-	// int		push_a;
+	int		push;
 	// int		push_b;
 	int		med;
 	int		len;
@@ -49,11 +49,19 @@ typedef struct s_stc
 	t_list	*b;
 }	t_stc;
 
-typedef struct s_wd
-{
-	char	*word;
+// typedef struct s_wd
+// {
+// 	char	*word;
 
-}	t_wd;
+// }	t_wd;
+
+//sort100
+int		find_less_upper(t_stc *stack, t_list *lst, int upper);
+void    send_to_a(t_stc *stack, int id);
+void    send_to_b(t_stc *stack);
+void    sort_100(t_stc *stack, int size);
+int     smart_sort_b(t_stc *stack);
+int	    find_id(t_stc *stack, t_list *lst, int id);
 
 // check_error.c
 void	check_nbr(char *s, t_stc *stack);
@@ -144,7 +152,7 @@ void quicksort_a(t_list **lst, t_stc *stack, int size);
 void quicksort_b(t_list **lst, t_stc *stack, int size);
 // utils.c
 int		ft_atoi (char *s, t_stc *stack, int ml);
-void	putstr(char *str);
+void	ft_putstr(char *str);
 // void	put_st(char st);
 void	error(void);
 void	error_free(t_stc *stack);

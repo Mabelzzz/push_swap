@@ -3,3 +3,8 @@ while (cnt / 2 )
 sent --> b 1 - cnt/2 + cnt % 2  1 - 51
 sent back 
 
+ck = 5 or 4
+send_to_b
+sort_3a
+send_to_a
+

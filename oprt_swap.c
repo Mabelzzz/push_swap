@@ -13,7 +13,7 @@ void	swap(t_list **lst)
 	(*lst)->next = (*lst)->next->next;
 	cur->next = (*lst);
 	(*lst) = cur;
-	// putstr("s");
+	// ft_putstr("s");
 	// put_st(st);
 
 }
@@ -21,18 +21,18 @@ void	swap(t_list **lst)
 void	sa(t_stc *stack)
 {
 	swap(&stack->a);
-	putstr("sa\n");
+	ft_putstr("sa\n");
 }
 
 void	sb(t_stc *stack)
 {
 	swap(&stack->b);
-	putstr("sb\n");
+	ft_putstr("sb\n");
 }
 
 void	ss(t_stc *stack)
 {
 	swap(&stack->a);
 	swap(&stack->b);
-	putstr("ss\n");
+	ft_putstr("ss\n");
 }

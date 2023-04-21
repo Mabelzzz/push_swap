@@ -1,8 +1,8 @@
 #include "push_swap.h"
 
 int		ft_atoi (char *s, t_stc *stack, int ml);
-void	putstr(char *str);
-void	put_st(char st);
+void	ft_putstr(char *str);
+void	putstr_err(char *str);
 void	error(void);
 void	error_free(t_stc *stack);
 void	free_stack_tmp(t_stc *stack);
@@ -23,6 +23,8 @@ int	ft_atoi (char *s, t_stc *stack, int ml)
 		sign = -1;
 		i++;
 	}
+	if (sign == -1 && s[i] == 0)
+		error();
 	if (s[i] == '0' && s[i + 1] != 0 && ml == 0)
 		error();
 	else if (s[i] == '0' && s[i + 1] != 0 && ml == 1)
@@ -32,7 +34,7 @@ int	ft_atoi (char *s, t_stc *stack, int ml)
 		result = (result * 10) + (s[i] - '0');
 		i++;
 	}
-	if (sign * result > 2147483647 || sign * result < -2147483648)
+	if ((sign * result) > 2147483647 || (sign * result) < -2147483648)
 	{
 		if (ml == 0)
 			error();
@@ -42,15 +44,22 @@ int	ft_atoi (char *s, t_stc *stack, int ml)
 	return ((int)(sign * result));
 }
 
-void	putstr(char *str)
+void	ft_putstr(char *str)
 {
 	while (*str)
 	{
-		write(1, &*str, 1);
+		write(1, &*str,1);
 		str++;
 	}
 }
-
+// void	putstr_err(char *str)
+// {
+// 	while (*str)
+// 	{
+// 		write(2, &*str,1);
+// 		str++;
+// 	}
+// }
 // void	put_st(char st)
 // {
 // 	write(1, &st, 1);
@@ -59,16 +68,18 @@ void	putstr(char *str)
 
 void	error(void)
 {
-	putstr("Error\n");
+	ft_putstr("Error\n");
 	exit(0);
 }
 
 void	error_free(t_stc *stack)
 {
-	putstr("Error\n");
+	ft_putstr("Error\n");
 	free_stack_tmp(stack);
-	free_lst(stack->a);
-	free_lst(stack->b);
+	if (stack->a)
+		free_lst(stack->a);
+	if (stack->b)
+		free_lst(stack->b);
 	exit(0);
 }
 

@@ -18,18 +18,18 @@ void	rotate(t_list **lst)
 void	ra(t_stc *stack)
 {
 	rotate(&stack->a);
-	putstr("ra\n");
+	ft_putstr("ra\n");
 }
 
 void	rb(t_stc *stack)
 {
 	rotate(&stack->b);
-	putstr("rb\n");
+	ft_putstr("rb\n");
 }
 
 void	rr(t_stc *stack)
 {
 	rotate(&stack->a);
 	rotate(&stack->b);
-	putstr("rr\n");
+	ft_putstr("rr\n");
 }

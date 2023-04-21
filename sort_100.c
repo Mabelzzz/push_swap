@@ -1,127 +1,137 @@
-// #include "push_swap.h"
+#include "push_swap.h"
 
-// void	sort_hund(t_stc *stack, t_list **lst, char st)
-// {
-// 	int n;
-// 	int x;
+void    sort_100(t_stc *stack, int size);
+void    send_to_b(t_stc *stack);
+void    send_to_a(t_stc *stack, int id);
+int	    find_id(t_stc *stack, t_list *lst, int id);
+int     find_less_upper(t_stc *stack, t_list *lst, int upper);
+// int     smart_sort_b(t_stc *stack);
 
-//     // l = stack->len;
-// 	(void)lst;
-// 	(void)st;
-//     n = 0;
-// 	x = stack->len;
-// 	stack->len = stack->cnt;
-//     while (x > 5)
-//     {
-//         x = stack->len / (2^n);
-//         n++;
-// 		printf("x = %d | n = %d\n", x, n);
-//     }
-// 	sort_bylen_min(stack, &stack->a, 'a', stack->cnt - stack->push);
-// 	sort_bylen_max(stack, &stack->b, 'b', 3);
-// 	send_back_a(stack);
-// 	stack->len = stack->push;
-// 	stack->med = 0;
-// 	stack->round = 0;
-// 	// quick_sort_pa(stack, &stack->b, 'b');
-// 	// sort_bylen_max(stack, &stack->b, 'b', 3);
-// 	// sort_bylen_min(stack, &stack->a, 'a', 3);
-// 	// send_back_b(stack);
-// 	// printf("len %d med %d push %d\n", stack->cnt - stack->push, stack->med, stack->push);
-// }
+void    sort_100(t_stc *stack, int size)
+{ 
+    int ck;
+    int i;
+    int n;
 
+    i = 0;
+    n = 0;
+    ck = (size / 100) + 3;
+    stack->upper = 1;
+    stack->chunk_size = (size / ck) + (size % ck);
+    while (i++ < ck)
+    {
+        if (i > 1)
+            stack->chunk_size = (size / ck);
+        stack->lower = stack->upper;
+        stack->upper = stack->lower + stack->chunk_size;
+        if (i == ck)
+            stack->upper -= 3;
+        stack->med = stack->lower + (stack->chunk_size / 2);
+        send_to_b(stack);
+    }
+    i = stack_size(stack->a, stack);
+    sort_by_len_a(stack, &stack->a, i);
+    n = size - i + 1;
+    while (--n > 0)
+        send_to_a(stack, n);
+}
 
-// void	send_back_a(t_stc *stack)
-// {
-// 	if (stack->b->id == stack->a->id - 1 && stack->push > 0)
-// 	{
-// 		pa(stack);
-// 		stack->push--;
-// 	}
-// 	else if (stack->b->next->id == stack->a->id - 1)
-// 		swap(&stack->b, 'b');
-// 	else if (stack->b->next->next->id == stack->a->id - 1)
-// 		rotate(&stack->b, 'b');
-// 	else if (ft_lstlast(stack->b)->id == stack->a->id - 1)
-// 		reverse_rotate(&stack->b, 'b');
-// 	else
-// 		return ;
-// 	send_back_a(stack);
-// }
+void    send_to_b(t_stc *stack)
+{
 
-// void	send_back_b(t_stc *stack)
-// {
-// 	if (stack->a->id == stack->b->id + 1)
-// 	{
-// 		pb(stack);
-// 		stack->push++;
-// 	}
-// 	else if (stack->a->next->id == stack->b->id + 1)
-// 		swap(&stack->a, 'a');
-// 	else if (stack->a->next->next->id == stack->b->id + 1)
-// 		rotate(&stack->a, 'a');
-// 	// else if (ft_lstlast(stack->a)->id == stack->b->id - 1)
-// 		// reverse_rotate(&stack->a, 'a');
-// 	else
-// 		return ;
-// 	send_back_b(stack);
-// }
+    int finder;
 
-// int	quick_sort_pb(t_stc *stack, t_list **lst, char st)
-// {
-// 	if (stack->push == stack->med)
-// 	{
-// 		stack->round++;
-// 		if(stack->len > 4)
-// 			stack->med = stack->med + (stack->len / 2 + stack->len % 2);
-// 		// else if (stack->len % 2 != 0 && stack->len > 4)
-// 			// stack->med = stack->med + ((stack->len + 1) / 2);
-// 		else
-// 			return (stack->len);
-// 		stack->len = stack->cnt - stack->med;
-// 	}
-// 	if((*lst)->id <= stack->med)
-// 	{
-// 		printf("pb id = %d med = %d-----------\n",(*lst)->id, stack->med);
-// 		pb(stack);
-// 		stack->push++;
-// 	}
-// 	else if((*lst)->next->id  <= stack->med)
-// 		rotate(&stack->a, st);
-// 		// swap(&stack->a, 'a');
-// 	else
-// 		reverse_rotate(&stack->a, st);
-// 	quick_sort_pb(stack, lst, st);
-// 	return (stack->len);
-// }
+    while (stack->pb_cnt < stack->upper - 1)
+    {
+        finder = find_less_upper(stack, stack->a, stack->upper);
+        if(stack_size(stack->a, stack) <= 3)
+            return ;
+        if (stack->a->id < stack->upper)
+        {
+            pb(stack);
+            stack->pb_cnt++;
+            if (stack_size(stack->b, stack) >= 2)
+            {
+                if (stack->a->id >= stack->upper && stack->b->id < stack->med)
+                    rr(stack);
+                else if ((ft_lstlast(stack->a)->id < stack->upper || finder == -1) && ft_lstlast(stack->b)->id  >= stack->med)
+                    rrr(stack);
+                else if (stack->b->id < stack->med)
+                    rb(stack);
+            }
+        }
+        else if (ft_lstlast(stack->a)->id < stack->upper || finder == -1)
+            rra(stack);
+        else
+            ra(stack);
+    }
 
-// int	quick_sort_pa(t_stc *stack, t_list **lst, char st)
-// {
-// 	if (stack->push == stack->med || stack->med == 0)
-// 	{
-// 		// stack->round++;
-// 		if(stack->len % 2 == 0 && stack->len > 3)
-// 			stack->med = stack->len / 2;
-// 		else if (stack->len % 2 != 0 && stack->len > 3)
-// 			stack->med = (stack->len + 1) / 2;
-// 		else
-// 			return (stack->len);
-// 		stack->len = stack->push - stack->med;
-// 	}
-// 	if((*lst)->id > stack->med)
-// 	{
-// 		printf("id = %d med = %d-----------\n",(*lst)->id, stack->med);
-// 		pa(stack);
-// 		stack->push--;
-// 		if (stack->push <= 3)
-// 			return (stack->len);
-// 	}
-// 	else if((*lst)->next->id  > stack->med)
-// 		rotate(&stack->b, 'b');
-// 		// swap(&stack->a, 'a');
-// 	else
-// 	// if(ft_lstlast(stack->b)->id  >= stack->med)
-// 		reverse_rotate(&stack->b, 'b');
-// 	quick_sort_pa(stack, lst, st);
-// 	return (stack->len);
-// }
+}
+
+void    send_to_a(t_stc *stack, int id)
+{
+    int finder;
+
+    finder = find_id(stack, stack->b, id);
+    while (stack_size(stack->b, stack) != 0)
+    {
+        if (stack->b->id == stack->a->id - 1)
+        {
+            pa(stack);
+            stack->pa_cnt++;
+            return ;
+        }
+        else if (finder != -1)
+            rb(stack);
+        else 
+            rrb(stack);
+    }
+    return ;
+}
+
+int	find_id(t_stc *stack, t_list *lst, int id)
+{
+	t_list *tmp;
+    int i;
+
+    i = 0;
+	tmp = lst;
+	while (tmp->next)
+	{
+		if (tmp->id == id)
+			break;
+		tmp = tmp->next;
+        i++;
+	}
+    if (i < (stack_size(lst, stack) / 2))
+        return (i);
+	return (-1);
+}
+int	find_less_upper(t_stc *stack, t_list *lst, int upper)
+{
+	t_list *tmp;
+    int i;
+    int max;
+    int min;
+
+    i = 0;
+    min = stack_size(lst, stack);
+    max = 0;
+	tmp = lst;
+	while (tmp->next)
+	{
+		if (tmp->id < upper)
+        {
+            if (i <= min)
+                min = i;
+            else if (i > max)
+                max = i;
+        }
+		tmp = tmp->next;
+        i++;
+	}
+    i = stack_size(lst, stack);
+    if (min <= i - max)
+        return (min);
+	return (-1);
+}

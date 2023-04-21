@@ -60,7 +60,7 @@ void	init(t_stc *stack)
 	stack->cnt = 0;
 	stack->chunk_size = 0;
 	stack->chunk = 0;
-	// stack->lower = med;
+	stack->lower = 0;
 	stack->upper = 0;
 	stack->min = 1;
 	stack->max = 0;
@@ -90,17 +90,13 @@ int	main(int argc, char **argv)
 	get_list(&stack);
 	if (check_duplicate(&stack.a) == 1 || stack.cnt == 0)
 		error_free(&stack);
-	// set_index(stack);
-	stack.chunk = (stack.cnt / 100) + 3;
-	// // stack.chunk = 3;
-	// stack.range = stack.cnt / stack.chunk;
 	set_index(stack.a);
-	// if(check_sort_min(stack.a, 3) == 0)
-	// 	printf("sorted\n");
-	// else
-	// 	printf("not sorted\n");
-	// sort_3a_top(&stack, stack.a, 0);
-	
+	if (check_sort(stack.a) == 0)
+	{
+		free_stack_tmp(&stack);
+		free_lst(stack.a);
+		return (0);
+	}
 	sort_by_len_a(&stack, &stack.a, stack.cnt);
 	// while (stack.a)
 	// {
@@ -119,27 +115,18 @@ int	main(int argc, char **argv)
 
 void	sort_by_len_a(t_stc *stack, t_list **lst, int len)
 {
-	// printf("len = %d | min = %d\n", len, stack->min);
 	if (len <= 1)
 		return ;
 	else if (len == 2)
 		sort_2a(stack);
 	else if (len == 3)
 		sort_3a(stack);
-	// else if (len < 10)
-	else if (len <= 10)
+	else if (len <= 15)
 		sort_ten(stack, stack->min);
-	else
+	else if (len == 500)
 		quicksort_a(lst, stack, len);
-		// sort_stack(lst, stack);
-	// else if (len == 5)
-	// 	sort_five(stack, stack->min);
-	// else if (len <= 10)
-	// 	sort_ten(stack, stack->min);
-	// else //if (len <= 100)
-		// sort_hund(stack, lst, st);
-		// sort_hundred(stack, &stack->a, 'a');
-		// sort_ab(stack, 2);
+	else
+		sort_100(stack, len);
 }
 // void	sort_by_len_b(t_stc *stack, int len)
 // {
@@ -252,7 +239,6 @@ int	check_sort(t_list *lst)
 	t_list *tmp;
 
 	tmp = lst;
-	// set_index(lst);
 	while (tmp->next)
 	{
 		if (tmp->id > tmp->next->id)
@@ -267,7 +253,6 @@ int	check_sort_min(t_list *tmp, int len)
 	t_list *lst;
 
 	lst = tmp;
-	// set_index(lst);
 	while (lst->next && len--)
 	{
 		if (lst->id > lst->next->id)
