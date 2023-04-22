@@ -1,17 +1,9 @@
 #include "../includes/push_swap.h"
 
-
-void	sort_2a(t_stc *stack)
-{
-	if (stack->a->val > stack->a->next->val)
-		sa(stack);
-}
-
-void	sort_2b(t_stc *stack)
-{
-	if (stack->b->val < stack->b->next->val)
-		sb(stack);
-}
+void	sort_3a(t_stc *stack);
+void	sort_3a_top(t_stc *stack);
+void	sort_3b_top(t_stc *stack);
+void	sort_3b_bottom(t_stc *stack);
 
 void	sort_3a(t_stc *stack)
 {
@@ -84,47 +76,5 @@ void	sort_3b_bottom(t_stc *stack)
 	{	
 		rrb(stack);
 		sb(stack);
-	}
-}
-
-void set_val(t_stc *stack, char st)
-{
-	if (st == 'a')
-	{
-		stack->x = stack->a->val;
-		stack->y = stack->a->next->val;
-		stack->z = stack->a->next->next->val;
-	}
-	if (st == 'b')
-	{
-		stack->x = stack->b->val;
-		stack->y = stack->b->next->val;
-		stack->z = stack->b->next->next->val;
-	}
-}
-
-void set_index(t_list *stack)
-{
-	t_list	*cur;
-	t_list	*check;
-	int		i;
-	int		j;
-
-	j = 0;
-	cur = stack;
-	while (cur)
-	{
-		i = 1;
-		check = stack;
-		while (check)
-		{
-			if (cur->val > check->val)
-				i++;
-			check = check->next;
-		}
-		cur->id = i;
-		// cur->i = j;
-		j++;
-		cur = cur->next;
 	}
 }

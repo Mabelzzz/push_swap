@@ -6,11 +6,15 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 14:30:42 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 14:30:46 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 22:47:25 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+int	check_sort(t_list *lst);
+int	check_sort_min(t_list *tmp, int len);
+int	check_sort_max(t_list *tmp, int len);
 
 int	check_sort(t_list *lst)
 {

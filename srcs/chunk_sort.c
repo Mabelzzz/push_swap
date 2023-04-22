@@ -6,7 +6,7 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:32:19 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 01:38:13 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 23:44:42 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 void	chunk_sort(t_stc *stack, int size);
 void	send_to_b(t_stc *stack);
 void	send_to_a(t_stc *stack, int id);
-int		find_id(t_stc *stack, t_list *lst, int id);
-int		find_less_upper(t_stc *stack, t_list *lst, int upper);
-// int     smart_sort_b(t_stc *stack);
+int		find_id(t_list *lst, int id);
+int		find_less_upper(t_list *lst, int upper);
 
 void	chunk_sort(t_stc *stack, int size)
 { 
@@ -41,28 +40,27 @@ void	chunk_sort(t_stc *stack, int size)
 		stack->med = stack->lower + (stack->chunk_size / 2);
 		send_to_b(stack);
 	}
-	i = stack_size(stack->a, stack);
+	i = stack_size(stack->a);
 	sort_by_len_a(stack, &stack->a, i);
 	n = size - i + 1;
 	while (--n > 0)
 		send_to_a(stack, n);
 }
 
-void    send_to_b(t_stc *stack)
+void	send_to_b(t_stc *stack)
 {
-
-	int finder;
+	int	finder;
 
 	while (stack->pb_cnt < stack->upper - 1)
 	{
-		finder = find_less_upper(stack, stack->a, stack->upper);
-		if(stack_size(stack->a, stack) <= 3)
+		finder = find_less_upper(stack->a, stack->upper);
+		if (stack_size(stack->a) <= 3)
 			return ;
 		if (stack->a->id < stack->upper)
 		{
 			pb(stack);
 			stack->pb_cnt++;
-			if (stack_size(stack->b, stack) >= 2)
+			if (stack_size(stack->b) >= 2)
 			{
 				if (stack->a->id >= stack->upper && stack->b->id < stack->med)
 					rr(stack);
@@ -77,15 +75,14 @@ void    send_to_b(t_stc *stack)
 		else
 			ra(stack);
 	}
-
 }
 
-void    send_to_a(t_stc *stack, int id)
+void	send_to_a(t_stc *stack, int id)
 {
-	int finder;
+	int	finder;
 
-	finder = find_id(stack, stack->b, id);
-	while (stack_size(stack->b, stack) != 0)
+	finder = find_id(stack->b, id);
+	while (stack_size(stack->b) != 0)
 	{
 		if (stack->b->id == stack->a->id - 1)
 		{
@@ -95,39 +92,40 @@ void    send_to_a(t_stc *stack, int id)
 		}
 		else if (finder != -1)
 			rb(stack);
-		else 
+		else
 			rrb(stack);
 	}
 	return ;
 }
 
-int	find_id(t_stc *stack, t_list *lst, int id)
+int	find_id(t_list *lst, int id)
 {
-	t_list *tmp;
-	int i;
+	t_list	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = lst;
 	while (tmp->next)
 	{
 		if (tmp->id == id)
-			break;
+			break ;
 		tmp = tmp->next;
 		i++;
 	}
-	if (i < (stack_size(lst, stack) / 2))
+	if (i < (stack_size(lst) / 2))
 		return (i);
 	return (-1);
 }
-int	find_less_upper(t_stc *stack, t_list *lst, int upper)
+
+int	find_less_upper(t_list *lst, int upper)
 {
-	t_list *tmp;
-	int i;
-	int max;
-	int min;
+	t_list	*tmp;
+	int		i;
+	int		max;
+	int		min;
 
 	i = 0;
-	min = stack_size(lst, stack);
+	min = stack_size(lst);
 	max = 0;
 	tmp = lst;
 	while (tmp->next)
@@ -142,7 +140,7 @@ int	find_less_upper(t_stc *stack, t_list *lst, int upper)
 		tmp = tmp->next;
 		i++;
 	}
-	i = stack_size(lst, stack);
+	i = stack_size(lst);
 	if (min <= i - max)
 		return (min);
 	return (-1);

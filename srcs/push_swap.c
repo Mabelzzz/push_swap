@@ -6,11 +6,14 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:33:30 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 18:10:51 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 22:56:55 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	init_push_swap(t_stc *stack);
+void	sort_by_len_a(t_stc *stack, t_list **lst, int len);
 
 int	main(int argc, char **argv)
 {

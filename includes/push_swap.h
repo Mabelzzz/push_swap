@@ -6,14 +6,11 @@
 # include <stdlib.h>
 # include <fcntl.h>
 #include "../gnl/get_next_line.h"
-// # include "get_next_line/get_next_line.h"
+
 typedef struct s_list
 {
 	int				val;
 	int				id;
-	// int				tmp_id;
-	// int				chunk_id;
-	// int				i;
 	struct s_list	*next;
 }	t_list;
 
@@ -33,51 +30,53 @@ typedef struct s_stc
 	int		size_b;
 	int		lower;
 	int		upper;
-	int		push;
-	// int		push_b;
+	// int		push;
 	int		med;
 	int		len;
-	// int		round;
 	int		pb_cnt;
 	int		pa_cnt;
 	int		ra_cnt;
 	int		rb_cnt;
-	// int		rra_cnt;
-	// int		rrb_cnt;
 	int		tmp_sz;
 	t_list	*a;
 	t_list	*b;
 }	t_stc;
 
-// typedef struct s_wd
-// {
-// 	char	*word;
-
-// }	t_wd;
-void	checker(t_stc *stack);
-void	read_oprt(t_stc *stack);
-int		find_oprt(char *line, size_t len);
-void	run_oprt(t_stc *stack, char *oprt);
-void	init_checker(t_stc *stack);
-//sort100
-int		find_less_upper(t_stc *stack, t_list *lst, int upper);
-void    send_to_a(t_stc *stack, int id);
-void    send_to_b(t_stc *stack);
-void    chunk_sort(t_stc *stack, int size);
-int     smart_sort_b(t_stc *stack);
-int	    find_id(t_stc *stack, t_list *lst, int id);
-
 // check_error.c
+void	error(void);
+void	error_free(t_stc *stack);
 void	check_nbr(char *s, t_stc *stack);
 int		check_duplicate(t_list **stack);
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+// check_sort.c
+int	check_sort(t_list *lst);
+int	check_sort_min(t_list *tmp, int len);
+int	check_sort_max(t_list *tmp, int len);
+
+// checker.c
+void	init_checker(t_stc *stack);
+void	checker(t_stc *stack);
+void	read_oprt(t_stc *stack);
+int		check_stack(t_stc *stack, char *str, size_t len);
+
+// chunk_sort.c
+void	chunk_sort(t_stc *stack, int size);
+void	send_to_b(t_stc *stack);
+void	send_to_a(t_stc *stack, int id);
+int		find_id(t_list *lst, int id);
+int		find_less_upper(t_list *lst, int upper);
+
+// ft_atoi.c
+int	ft_atoi(char *s, t_stc *stack, int ml);
 
 // ft_split.c
 size_t	cnt_alphabet(char *s, char c);
-char	*keep_alphabet(char *s, char c);
 size_t	cnt_word(char *s, char c);
+char	*keep_alphabet(char *s, char c);
 char	**ft_split(char *s, char c);
+
+// ft_strncmp.c
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // get_input.c
 void	get_val(t_stc *stack, int argc, char **argv);
@@ -109,71 +108,50 @@ void	ss(t_stc *stack);
 // push_swap.c
 void	init_push_swap(t_stc *stack);
 void	sort_by_len_a(t_stc *stack, t_list **lst, int len);
-void	sort_by_len_b(t_stc *stack, int len);
-void	push_id_a(t_stc *stack, t_list *tmp, int id);
-void	push_id_b(t_stc *stack, t_list *tmp, int id);
-// void	sort_bylen_max(t_stc *stack, t_list **lst, char st, int len);
-// sort_bylen(t_stc *stack, int len);
-// void	sort_ab(t_stc *stack, int c);
-// void	sort_a(t_stc *stack, t_list *a, t_list *l_a, int c);
-// void	sort_b(t_stc *stack, t_list *b, t_list *l_b, int c);
-int		check_sort_max(t_list *lst, int len);
-int		check_sort_min(t_list *lst, int len);
-int		check_sort(t_list *lst);
-// sort_three.c
-void	sort_2a(t_stc *stack);
-// void	sort_2b(t_list **lst, char st);
-void	sort_3a(t_stc *stack);
-// void	sort_3b_top(t_stc *stack, t_list **lst, char st);
-void	sort_2b(t_stc *stack);
-void	sort_3b_top(t_stc *stack);
-// void	sort_3a_top(t_stc *stack, t_list *tmp, int r);
-void	sort_3a_top(t_stc *stack);
-void	sort_3b_bottom(t_stc *stack);
 
-void	set_val(t_stc *stack, char st);
-void set_index(t_list *stack);
+// quick_sort.c
+void	quicksort_a(t_list **lst, t_stc *stack, int size);
+void	quicksort_b(t_list **lst, t_stc *stack, int size);
 
-// sort_hundred.c
-// void	sort_hundred(t_stc *stack, t_list **lst, char st);
-// void	sort_hund(t_stc *stack, t_list **lst, char st);
-int		quick_sort_pb(t_stc *stack, t_list **lst, char st);
-int		quick_sort_pa(t_stc *stack, t_list **lst, char st);
-void	find_max(t_stc *stack);
-// void	push_b(t_stc *stack, int ck);
-// void	send_back_a(t_stc *stack);
-// void	send_back_b(t_stc *stack);
-// int qs_pb2(t_list **lst, t_stc *stack, int size);
-// sort_five.c
-void	sort_ten(t_stc *stack, int min);
-void	sort_five(t_stc *stack, int min);
+// run_checker.c
+void	oprt_ss(t_stc *stack);
+void	oprt_rr(t_stc *stack);
+void	oprt_rrr(t_stc *stack);
+int		find_oprt(char *line, size_t len);
+void	run_oprt(t_stc *stack, char *oprt);
+
+// set_val.c
+void    set_val(t_stc *stack, char st);
+void    set_index(t_list *stack);
+
+// sort_ten.c
 void	sort_ten(t_stc *stack, int min);
 void	push_min_b(t_stc *stack, int id);
-void	push_min_b3(t_stc *stack, int id);
-// void 	sort_stack(t_list **lst, t_stc *stack);
-int	quicksort(t_list **lst, t_stc *stack, int size);
-int quicksort_back(t_list **lst, t_stc *stack);
+void	push_id_b(t_stc *stack, t_list *tmp, int id);
+void	push_id_a(t_stc *stack, t_list *tmp, int id);
 
-void quicksort_a(t_list **lst, t_stc *stack, int size);
-void quicksort_b(t_list **lst, t_stc *stack, int size);
-// utils.c
-int		ft_atoi (char *s, t_stc *stack, int ml);
-void	ft_putstr(char *str);
-// void	put_st(char st);
-void	error(void);
-void	error_free(t_stc *stack);
-void	free_stack_tmp(t_stc *stack);
+// sort_three.c
+void	sort_3a(t_stc *stack);
+void	sort_3a_top(t_stc *stack);
+void	sort_3b_top(t_stc *stack);
+void	sort_3b_bottom(t_stc *stack);
+
+// sort_two.c
+void	sort_2a(t_stc *stack);
+void	sort_2b(t_stc *stack);
+
+// utils_lst.c
 void	free_lst(t_list *lst);
-int		stack_size(t_list	*stc, t_stc *stack);
-int		stack_top(t_list	*stc);
-int		find_stack(t_list	*stc, t_stc *stack, int nbr);
-void	find_min_max_idex(t_list	*stc, t_stc *stack, int len);
-// utils_list.c
-
-
 t_list	*ft_lstlast(t_list *lst);
-// t_list	*ft_lstnew(int val);
+t_list	*ft_lstnew(int val);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
+
+// utils.c
+void	ft_putstr(char *str);
+void	ft_putstr_err(char *str);
+void	free_stack_tmp(t_stc *stack);
+int		stack_size(t_list *stc);
+void	find_min_max_idex(t_list *stc, t_stc *stack, int len);
 
 #endif

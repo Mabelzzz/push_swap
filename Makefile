@@ -14,17 +14,20 @@ UTILS =	srcs/check_error.c \
 		srcs/oprt_rerotate.c \
 		srcs/oprt_rotate.c \
 		srcs/oprt_swap.c \
-		srcs/sort_three.c \
+		srcs/set_val.c \
 		srcs/utils_lst.c \
 		srcs/utils.c \
 
 SRCS = 	srcs/push_swap.c \
+		srcs/sort_three.c \
+		srcs/sort_two.c \
 		srcs/sort_ten.c \
 		srcs/chunk_sort.c \
 		srcs/quick_sort.c \
 		$(UTILS)
 
 CSRCS = srcs/checker.c \
+		srcs/run_checker.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
 		$(UTILS) 	

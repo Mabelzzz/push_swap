@@ -6,7 +6,7 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:33:08 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 01:33:09 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 22:55:57 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,4 @@ void	get_list(t_stc *stack)
 		i++;
 	}
 	stack->a = start;
- 
 }

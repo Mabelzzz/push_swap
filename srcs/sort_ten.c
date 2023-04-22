@@ -6,11 +6,16 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:32:32 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 01:35:54 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 23:20:12 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
+
+void	sort_ten(t_stc *stack, int min);
+void	push_min_b(t_stc *stack, int id);
+void	push_id_b(t_stc *stack, t_list *tmp, int id);
+void	push_id_a(t_stc *stack, t_list *tmp, int id);
 
 void	sort_ten(t_stc *stack, int min)
 {
@@ -48,6 +53,7 @@ void	push_min_b(t_stc *stack, int id)
 		ra(stack);
 	push_min_b(stack, id);
 }
+
 void	push_id_b(t_stc *stack, t_list *tmp, int id)
 {
 	static int r;
@@ -73,7 +79,7 @@ void	push_id_b(t_stc *stack, t_list *tmp, int id)
 void	push_id_a(t_stc *stack, t_list *tmp, int id)
 {
 	static int r;
-	
+
 	if (tmp->id == id)
 	{
 		pa(stack);

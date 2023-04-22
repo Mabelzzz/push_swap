@@ -6,15 +6,15 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:32:54 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 22:08:50 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 23:16:36 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
 size_t	cnt_alphabet(char *s, char c);
-char	*keep_alphabet(char *s, char c);
 size_t	cnt_word(char *s, char c);
+char	*keep_alphabet(char *s, char c);
 char	**ft_split(char *s, char c);
 
 size_t	cnt_alphabet(char *s, char c)
@@ -25,24 +25,6 @@ size_t	cnt_alphabet(char *s, char c)
 	while (s[i] != 0 && s[i] != c)
 		i++;
 	return (i);
-}
-
-char	*keep_alphabet(char *s, char c)
-{
-	size_t	i;
-	char	*word;
-
-	i = 0;
-	word = malloc(sizeof(char) * (cnt_alphabet(s, c) + 1));
-	if (!word)
-		return (NULL);
-	while (s[i] && s[i] != c && i <= cnt_alphabet(s, c))
-	{
-		word[i] = s[i];
-		i++;
-	}
-	word[i] = '\0';
-	return (word);
 }
 
 size_t	cnt_word(char *s, char c)
@@ -62,6 +44,24 @@ size_t	cnt_word(char *s, char c)
 			i++;
 	}
 	return (count);
+}
+
+char	*keep_alphabet(char *s, char c)
+{
+	size_t	i;
+	char	*word;
+
+	i = 0;
+	word = malloc(sizeof(char) * (cnt_alphabet(s, c) + 1));
+	if (!word)
+		return (NULL);
+	while (s[i] && s[i] != c && i <= cnt_alphabet(s, c))
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char *s, char c)

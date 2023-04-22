@@ -1,5 +1,11 @@
 #include "../includes/push_swap.h"
 
+void	free_lst(t_list *lst);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstnew(int val);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+
 void	free_lst(t_list *lst)
 {
 	t_list	*cur;
@@ -51,18 +57,6 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if (!lst && !new)
 		return ;
-	// if (!*lst)
-
 	new->next = *lst;
 	*lst = new;
 }
-// t_stack	*tmp;
-
-// 	if (*stack == NULL)
-// 		*stack = new;
-// 	else
-// 	{
-// 		tmp = *stack;
-// 		*stack = new;
-// 		new->next = tmp;
-// 	}
