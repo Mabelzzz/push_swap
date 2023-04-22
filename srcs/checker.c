@@ -6,12 +6,11 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 14:14:12 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 23:37:20 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 23:55:39 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-#include "../gnl/get_next_line.h"
 
 void	init_checker(t_stc *stack);
 void	checker(t_stc *stack);
