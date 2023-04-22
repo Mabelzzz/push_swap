@@ -6,41 +6,17 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:33:30 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 01:40:37 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 18:10:51 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	init(t_stc *stack)
-{
-	stack->cnt = 0;
-	stack->chunk_size = 0;
-	stack->chunk = 0;
-	stack->lower = 0;
-	stack->upper = 0;
-	stack->min = 1;
-	stack->max = 0;
-	// stack->push_b = 0;
-	// stack->push_a = 0;
-	stack->med = 0;
-	// stack->round = 0;
-	stack->pb_cnt = 0;
-	stack->pa_cnt = 0;
-	stack->ra_cnt = 0;
-	stack->rb_cnt = 0;
-	// stack->rra_cnt = 0;
-	// stack->rrb_cnt = 0;
-	stack->a = NULL;
-	stack->b = NULL;
-	stack->tmp = NULL;
-}
-
 int	main(int argc, char **argv)
 {
 	t_stc	stack;
 
-	init(&stack);
+	init_push_swap(&stack);
 	if (argc == 1)
 		return (0);
 	get_val(&stack, argc, argv);
@@ -60,6 +36,25 @@ int	main(int argc, char **argv)
 	free_lst(stack.b);
 }
 
+void	init_push_swap(t_stc *stack)
+{
+	stack->cnt = 0;
+	stack->chunk_size = 0;
+	stack->chunk = 0;
+	stack->lower = 0;
+	stack->upper = 0;
+	stack->min = 1;
+	stack->max = 0;
+	stack->med = 0;
+	stack->pb_cnt = 0;
+	stack->pa_cnt = 0;
+	stack->ra_cnt = 0;
+	stack->rb_cnt = 0;
+	stack->a = NULL;
+	stack->b = NULL;
+	stack->tmp = NULL;
+}
+
 void	sort_by_len_a(t_stc *stack, t_list **lst, int len)
 {
 	if (len <= 1)
@@ -74,46 +69,4 @@ void	sort_by_len_a(t_stc *stack, t_list **lst, int len)
 		quicksort_a(lst, stack, len);
 	else
 		chunk_sort(stack, len);
-}
-
-int	check_sort(t_list *lst)
-{
-	t_list *tmp;
-
-	tmp = lst;
-	while (tmp->next)
-	{
-		if (tmp->id > tmp->next->id)
-			return (1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int	check_sort_min(t_list *tmp, int len)
-{
-	t_list *lst;
-
-	lst = tmp;
-	while (lst->next && len--)
-	{
-		if (lst->id > lst->next->id)
-			return (1);
-		lst = lst->next;
-	}
-	return (0);
-}
-
-int	check_sort_max(t_list *tmp, int len)
-{
-	t_list *lst;
-
-	lst = tmp;
-	while (lst->next && len--)
-	{
-		if (lst->id < lst->next->id)
-			return (1);
-		lst = lst->next;
-	}
-	return (0);
 }

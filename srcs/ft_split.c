@@ -6,7 +6,7 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:32:54 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 01:32:55 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 22:08:50 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ char	**ft_split(char *s, char c)
 	size_t	cnt;
 
 	cnt = cnt_word(s, c);
-	// if (cnt == 0)
-	// 	error();
+	if (cnt == 0)
+		error();
 	if (!s)
 		return (NULL);
 	word = (char **)malloc(sizeof(char *) * (cnt + 1));

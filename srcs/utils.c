@@ -16,23 +16,6 @@ void	ft_putstr(char *str)
 	}
 }
 
-void	error(void)
-{
-	ft_putstr("Error\n");
-	exit(0);
-}
-
-void	error_free(t_stc *stack)
-{
-	ft_putstr("Error\n");
-	free_stack_tmp(stack);
-	if (stack->a)
-		free_lst(stack->a);
-	if (stack->b)
-		free_lst(stack->b);
-	exit(0);
-}
-
 void	free_stack_tmp(t_stc *stack)
 {
 	int	i;

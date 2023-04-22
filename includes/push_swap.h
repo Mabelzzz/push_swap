@@ -5,7 +5,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <fcntl.h>
-
+#include "../gnl/get_next_line.h"
 // # include "get_next_line/get_next_line.h"
 typedef struct s_list
 {
@@ -54,7 +54,11 @@ typedef struct s_stc
 // 	char	*word;
 
 // }	t_wd;
-
+void	checker(t_stc *stack);
+void	read_oprt(t_stc *stack);
+int		find_oprt(char *line, size_t len);
+void	run_oprt(t_stc *stack, char *oprt);
+void	init_checker(t_stc *stack);
 //sort100
 int		find_less_upper(t_stc *stack, t_list *lst, int upper);
 void    send_to_a(t_stc *stack, int id);
@@ -66,6 +70,8 @@ int	    find_id(t_stc *stack, t_list *lst, int id);
 // check_error.c
 void	check_nbr(char *s, t_stc *stack);
 int		check_duplicate(t_list **stack);
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 // ft_split.c
 size_t	cnt_alphabet(char *s, char c);
@@ -101,7 +107,7 @@ void	sb(t_stc *stack);
 void	ss(t_stc *stack);
 
 // push_swap.c
-void	init(t_stc *stack);
+void	init_push_swap(t_stc *stack);
 void	sort_by_len_a(t_stc *stack, t_list **lst, int len);
 void	sort_by_len_b(t_stc *stack, int len);
 void	push_id_a(t_stc *stack, t_list *tmp, int id);

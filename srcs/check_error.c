@@ -6,14 +6,33 @@
 /*   By: pnamwayk <pnamwayk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 01:32:40 by pnamwayk          #+#    #+#             */
-/*   Updated: 2023/04/22 01:32:41 by pnamwayk         ###   ########.fr       */
+/*   Updated: 2023/04/22 18:00:15 by pnamwayk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
+void	error(void);
+void	error_free(t_stc *stack);
 void	check_nbr(char *s, t_stc *stack);
 int		check_duplicate(t_list **stack);
+
+void	error(void)
+{
+	ft_putstr("Error\n");
+	exit(0);
+}
+
+void	error_free(t_stc *stack)
+{
+	ft_putstr("Error\n");
+	free_stack_tmp(stack);
+	if (stack->a)
+		free_lst(stack->a);
+	if (stack->b)
+		free_lst(stack->b);
+	exit(0);
+}
 
 void	check_nbr(char *s, t_stc *stack)
 {
